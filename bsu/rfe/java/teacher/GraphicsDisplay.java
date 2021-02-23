@@ -312,10 +312,10 @@ public class GraphicsDisplay extends JPanel
         graphicsDisplay.scaleMode = scaleMode;
     }
     
-    public class MouseHandler extends MouseAdapter
+    public class MouseHandler extends MouseAdapter //интерфейс унаследованный от интерфейса для отслеживания состояния кнопок мыши
     {
         @Override
-        public void mouseClicked(final MouseEvent ev) {
+        public void mouseClicked(final MouseEvent ev) { //вызывается при нажатии и отпускании кнопки мыши
             if (ev.getButton() == 3) {
                 if (GraphicsDisplay.this.undoHistory.size() > 0) {
                     GraphicsDisplay.access$1(GraphicsDisplay.this, GraphicsDisplay.this.undoHistory.get(GraphicsDisplay.this.undoHistory.size() - 1));
@@ -329,7 +329,7 @@ public class GraphicsDisplay extends JPanel
         }
         
         @Override
-        public void mousePressed(final MouseEvent ev) {
+        public void mousePressed(final MouseEvent ev) {  // вызывается при нажатии кнопки мыши
             if (ev.getButton() != 1) {
                 return;
             }
@@ -347,7 +347,7 @@ public class GraphicsDisplay extends JPanel
         }
         
         @Override
-        public void mouseReleased(final MouseEvent ev) {
+        public void mouseReleased(final MouseEvent ev) { //вызывается при отпускании кнопки мыши
             if (ev.getButton() != 1) {
                 return;
             }
@@ -366,10 +366,10 @@ public class GraphicsDisplay extends JPanel
         }
     }
     
-    public class MouseMotionHandler implements MouseMotionListener
+    public class MouseMotionHandler implements MouseMotionListener //для отслеживания координат курсора мыши
     {
         @Override
-        public void mouseMoved(final MouseEvent ev) {
+        public void mouseMoved(final MouseEvent ev) { //вызывается для отслеживания курсора без нажатия кнопки при движении внутри компонента
             GraphicsDisplay.access$6(GraphicsDisplay.this, GraphicsDisplay.this.findSelectedPoint(ev.getX(), ev.getY()));
             if (GraphicsDisplay.this.selectedMarker >= 0) {
                 GraphicsDisplay.this.setCursor(Cursor.getPredefinedCursor(8));
@@ -381,7 +381,7 @@ public class GraphicsDisplay extends JPanel
         }
         
         @Override
-        public void mouseDragged(final MouseEvent ev) {
+        public void mouseDragged(final MouseEvent ev) { //вызывается для отслеживания курсора с нажатием кнопки при движении внутри компонента
             if (GraphicsDisplay.this.changeMode) {
                 final double[] currentPoint = GraphicsDisplay.this.translatePointToXY(ev.getX(), ev.getY());
                 double newY = ((Double[])GraphicsDisplay.this.graphicsData.get(GraphicsDisplay.this.selectedMarker))[1] + (currentPoint[1] - ((Double[])GraphicsDisplay.this.graphicsData.get(GraphicsDisplay.this.selectedMarker))[1]);
